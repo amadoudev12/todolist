@@ -5,6 +5,7 @@ import { GoPencil } from "react-icons/go";
 type Task = {
   name: string
   completed: boolean
+  date:string
 }
 
 type TaskCardProps = {
@@ -21,27 +22,43 @@ export default function ({task,onDelete, changeTask,onComplete}:TaskCardProps) {
     const chageUpdate = ()=>{
         setUpdate(!update)
     }
-    console.log(checked)
+    // console.log(checked)
     const editFunction = (task:string)=>{
         changeTask(task)
         setUpdate(false)
     }
+
   return (
 <div className="card min-h-[100px] rounded-lg py-3 px-4 mb-4 shadow-md bg-white border-l-4 border-[#884dee] hover:shadow-lg transition-shadow">
     <div className="flex items-center justify-between gap-4">
         {!update ? (
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-                <input 
-                    type="checkbox" 
+            <div className="flex  gap-3 flex-1 min-w-0">
+               <div>
+                 <input 
+                    type="checkbox"
+                    checked={checked} 
                     onChange={() => {setChecked(!checked)}}
-                    className="w-5 h-5 rounded border-gray-300 text-[#884dee] focus:ring-[#884dee] cursor-pointer flex-shrink-0 "
+                    className="w-5 h-5 my-2 rounded border-gray-300 text-[#884dee] focus:ring-[#884dee] cursor-pointer flex-shrink-0 "
                     onClick={onComplete}
                 />
-                {!checked ? (
-                    <h2 className="text-[18px] break-words text-gray-800">{task.name}</h2>
-                ) : (
-                    <del className="text-[18px] break-words text-gray-400">{task.name}</del>
-                )}
+               </div>
+                <div>
+                    {!checked ? (
+                        <div className="flex flex-col ">
+                            <div >
+                                <h2 className="text-[17px] break-words text-gray-800">{task.name}</h2>
+                            </div>
+                            <h2 className="text-[12px] break-words text-gray-500 ">Ajoutée le {task.date}</h2>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col ">
+                            <div>
+                                <del className="text-[15px] break-words text-gray-400">{task.name}</del>
+                            </div>
+                            <del className="text-[12px] break-words text-gray-400">Ajoutée le {task.date}</del>
+                        </div>
+                    )}
+                </div>
             </div>
         ) : (
             <div className="flex items-center gap-2 flex-1">
@@ -68,10 +85,10 @@ export default function ({task,onDelete, changeTask,onComplete}:TaskCardProps) {
         <div className="flex items-center gap-4 flex-shrink-0">
             <GoPencil 
                 onClick={chageUpdate}
-                className="text-[20px] text-gray-600 hover:text-[#884dee] cursor-pointer transition-colors"
+                className="text-[15px] text-gray-600 hover:text-[#884dee] cursor-pointer transition-colors"
             />
             <FaRegTrashAlt 
-                className="text-[20px] text-gray-400 hover:text-red-600 cursor-pointer transition-colors" 
+                className="text-[15px] text-gray-400 hover:text-red-600 cursor-pointer transition-colors" 
                 onClick={onDelete}
             />
         </div>
