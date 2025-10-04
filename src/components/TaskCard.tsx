@@ -61,13 +61,14 @@ export default function ({task,onDelete, changeTask,onComplete}:TaskCardProps) {
                 </div>
             </div>
         ) : (
-            <div className="flex items-center gap-2 flex-1">
+            <div className="flex items-center gap-2 flex-1 max-sm:flex-col  ">
                 <input 
                     type="text" 
                     onChange={(e) => {setEditValue(e.target.value)}} 
                     defaultValue={task.name}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md outline-none focus:border-[#884dee] focus:ring-2 focus:ring-[#884dee] focus:ring-opacity-20"
+                    className=" flex-1 px-3 py-2 border border-gray-300 rounded-md outline-none focus:border-[#884dee] focus:ring-2 focus:ring-[#884dee] focus:ring-opacity-20"
                 /> 
+                <div className="flex gap-2">
                 <button 
                     onClick={() => {editFunction(editValue)}}
                     className="px-4 py-2 bg-[#884dee] text-white rounded-md hover:bg-violet-600 transition-colors"
@@ -80,6 +81,7 @@ export default function ({task,onDelete, changeTask,onComplete}:TaskCardProps) {
                 >
                     Annuler
                 </button>
+                </div>
             </div>
         )}
         <div className="flex items-center gap-4 flex-shrink-0">
